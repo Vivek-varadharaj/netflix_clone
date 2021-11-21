@@ -32,6 +32,25 @@ static Future getDramayMovies(id) async{
 }
 
 
+static Future getMoviesWithVideos() async{
+  try{
+    final response = await http.get(Uri.parse(
+ "https://api.themoviedb.org/3/trending/all/day?api_key=070180315e67616c89018d2d663a53eb&append_to_response=videos"));
+  if (response.statusCode == 200) {
+    var jsonData = json.decode(response.body);
+    return jsonData['results'];
+  }
+  }
+  catch(e){
+    return [];
+  }
+}
+
+
+
+
+
+
   }
 
 

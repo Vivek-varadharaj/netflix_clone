@@ -75,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     padding: EdgeInsets.only(top: 0),
                     children: [
                       StackPoster("https://image.tmdb.org/t/p/original/" +
-                          widget.movies[18]["poster_path"]),
+                          widget.movies[8]["poster_path"]),
                       ListViewWithHeading( "Popular on Netflix", "35",170.00),
                       ListViewWithHeading( "Trending Now","80",170.00),
                       ListViewWithHeading("Only on Netflix","35",260),

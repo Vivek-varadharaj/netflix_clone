@@ -54,7 +54,7 @@ class ListViewWithStack extends StatelessWidget {
                           
                             ),
                             Positioned(
-                              left: -10,
+                              left: index !=0 ? -10 :-5,
                               bottom: -20,
                               child: Container(
                                
@@ -65,7 +65,7 @@ class ListViewWithStack extends StatelessWidget {
                                   child: Text((index+1).toString(), style: StyleForApp.hollow,)),
                               ),),
 
-                              Container(
+                            index !=0 ?  Container(
                                 width: 20,
                                 height: 170,
                                 decoration: BoxDecoration(
@@ -75,7 +75,7 @@ class ListViewWithStack extends StatelessWidget {
                                     colors: [Colors.transparent,
                                     Colors.black])
                                 ),
-                              )
+                              ): Container() 
                         
                               
                           ],

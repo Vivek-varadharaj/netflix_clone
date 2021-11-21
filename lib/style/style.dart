@@ -12,6 +12,7 @@ class StyleForApp {
   );
   static TextStyle headingBlack = TextStyle(color: Colors.black, fontSize: 16);
   static TextStyle small = TextStyle(color: Colors.white, fontSize: 12);
+  static TextStyle smallShade = TextStyle(color: Colors.grey, fontSize: 12);
   static TextStyle hollow = TextStyle(
     
     color: Colors.black87, fontSize:100,

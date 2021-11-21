@@ -14,7 +14,7 @@ class AppBarHomePage {
   
       return AppBar(
               elevation: 0,
-              backgroundColor: notifierForBottom.value<40? Colors.black.withOpacity(notifierForBottom.value/100): Colors.black.withOpacity(0.4),
+              backgroundColor: notifierForBottom.value<60? Colors.black.withOpacity(notifierForBottom.value/100): Colors.black.withOpacity(0.6),
               bottom: PreferredSize(
                 preferredSize: notifierForBottom.value < 60
                     ? Size(width, 50 - notifierForBottom.value)

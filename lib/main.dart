@@ -10,8 +10,9 @@ import 'package:netflix_clone/screens/home_screen.dart';
 
 
 void main() async {
-  List<dynamic> movies = await Api.getActionMovies();
+  List<dynamic> movies = await Api.getMoviesWithVideos();
   print(movies);
+
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
     theme: ThemeData(
@@ -47,6 +48,7 @@ class _MyAppState extends State<MyApp> {
       
     ];
     return Scaffold(
+      
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         showSelectedLabels: true,
