@@ -50,7 +50,9 @@ class ListViewWithStack extends StatelessWidget {
                               
                               width: 140,
                               child: Image.network("https://image.tmdb.org/t/p/original/" +
-                          movies[index]["poster_path"]),
+                          movies[index]["poster_path"],
+                          errorBuilder: (context,error,stackTrace)=>Container(),
+                          ),
                           
                             ),
                             Positioned(

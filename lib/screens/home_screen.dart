@@ -26,25 +26,12 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    scroll.addListener(_listner);
+    // scroll.addListener(_listner);
     notifier.value = 100;
     notifierForBottom.value = 0;
   }
 
-  void _listner() {
-    double scrollOffset = scroll.offset;
-    print(scrollOffset);
-
-    if (scrollOffset > 100) {
-      //  notifier.value =   0;
-      setState(() {});
-
-      if (scrollOffset < 100) {
-        //  notifier.value =100;
-        setState(() {});
-      }
-    }
-  }
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -74,12 +61,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     controller: scroll,
                     padding: EdgeInsets.only(top: 0),
                     children: [
-                      StackPoster("https://image.tmdb.org/t/p/original/" +
-                          widget.movies[8]["poster_path"]),
+                      StackPoster(widget.movies[7]),
                       ListViewWithHeading( "Popular on Netflix", "35",170.00),
+                      ListViewWithStack("Top 10 in India Today", widget.movies),
                       ListViewWithHeading( "Trending Now","80",170.00),
                       ListViewWithHeading("Only on Netflix","35",260),
-                      ListViewWithStack("Top 10 in India Today", widget.movies),
+                      
                     ],
                   ),
                 ),
@@ -113,7 +100,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       padding: const EdgeInsets.only(
                                           bottom: 20.0, left: 10),
                                       child: Image.network(
-                                        "https://www.pngkey.com/png/full/87-872187_lupa-search-icon-white-png.png",
+                                        "https://www.iconsdb.com/icons/preview/white/active-search-xxl.png",
                                         width: 20,
                                         height: 20,
                                         fit: BoxFit.fill,

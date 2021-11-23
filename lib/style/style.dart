@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 
 class StyleForApp {
   static TextStyle heading = TextStyle(color: Colors.white, fontSize: 16);

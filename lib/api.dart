@@ -46,6 +46,20 @@ static Future getMoviesWithVideos() async{
   }
 }
 
+static Future getYoutubeVideo(String id) async{
+     try{
+    final response = await http.get(Uri.parse(
+ url +  'movie/' + id +'/videos?api_key='+ apiKey + '&language=en-US'));
+  if (response.statusCode == 200) {
+    var jsonData = json.decode(response.body);
+    return jsonData['results'];
+  }
+  }
+  catch(e){
+    return [];
+  }
+}
+
 
 
 

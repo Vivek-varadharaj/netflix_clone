@@ -11,7 +11,7 @@ import 'package:netflix_clone/screens/home_screen.dart';
 
 void main() async {
   List<dynamic> movies = await Api.getMoviesWithVideos();
-  print(movies);
+
 
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
@@ -59,7 +59,8 @@ class _MyAppState extends State<MyApp> {
          selectedItemColor: Colors.white,
               
               onTap: _onItemTapped,
-         backgroundColor: Colors.black,
+        //  backgroundColor: Colors.black,
+        backgroundColor: Colors.transparent,
       
         items: [
         BottomNavigationBarItem(
@@ -86,6 +87,7 @@ class _MyAppState extends State<MyApp> {
         ),
 
          BottomNavigationBarItem(
+           backgroundColor: Colors.transparent,
           
            title: Text("Fast Laughs",style: TextStyle(color: Colors.white,fontSize: 12),),
           icon: Icon(

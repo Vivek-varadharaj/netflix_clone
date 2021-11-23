@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 import 'package:netflix_clone/style/style.dart';
+import 'package:netflix_clone/widgets/video_playing_Widget.dart';
 
 class StackPoster extends StatelessWidget {
-  String posterPath;
-  StackPoster(this.posterPath);
+  dynamic movie;
+  StackPoster( this.movie);
 
   @override
   Widget build(BuildContext context) {
@@ -15,8 +17,10 @@ class StackPoster extends StatelessWidget {
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height * 0.68,
           child: Image.network(
-            posterPath,
+            "https://image.tmdb.org/t/p/original/" +
+                          movie["poster_path"],
             fit: BoxFit.cover,
+            errorBuilder: (context,error,stack)=>Container(),
           ),
         ),
         Positioned(
@@ -110,26 +114,33 @@ class StackPoster extends StatelessWidget {
                         ),
                         Column(
                           children: [
-                            Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(4),
-                                ),
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 15, vertical: 4),
-                                child: IntrinsicWidth(
-                                    child: Row(
-                                  children: [
-                                    Icon(
-                                      Icons.play_arrow,
-                                      color: Colors.black,
-                                    ),
-                                    Text(
-                                      "Play",
-                                      style: StyleForApp.headingBlack,
-                                    ),
-                                  ],
-                                )))
+                            GestureDetector(
+                              onTap: (){
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=> 
+                                VideoPlayingWidget(movie["id"].toString())
+                                ));
+                              },
+                              child: Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(4),
+                                  ),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 15, vertical: 4),
+                                  child: IntrinsicWidth(
+                                      child: Row(
+                                    children: [
+                                      Icon(
+                                        Icons.play_arrow,
+                                        color: Colors.black,
+                                      ),
+                                      Text(
+                                        "Play",
+                                        style: StyleForApp.headingBlack,
+                                      ),
+                                    ],
+                                  ))),
+                            )
                           ],
                         ),
                         Column(

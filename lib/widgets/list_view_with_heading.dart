@@ -2,22 +2,33 @@ import 'package:flutter/material.dart';
 import 'package:netflix_clone/api.dart';
 import 'package:netflix_clone/style/style.dart';
 
-class ListViewWithHeading extends StatelessWidget {
+class ListViewWithHeading extends StatefulWidget {
  
   String title;
   String id;
   double height;
   ListViewWithHeading( this.title, this.id, this.height);
-  List<dynamic> movies=[];
 
+  @override
+  State<ListViewWithHeading> createState() => _ListViewWithHeadingState();
+}
 
+class _ListViewWithHeadingState extends State<ListViewWithHeading> {
+ Future<dynamic>? movies;
 
+  @override
+  void initState() {
+    
+    super.initState();
+    movies = Api.getDramayMovies(widget.id);
+  }
+  
   @override
   Widget build(BuildContext context) {
     
    
     return FutureBuilder(
-      future: Api.getDramayMovies(id),
+      future: movies,
       builder: (context,AsyncSnapshot<dynamic>snapShot) {
         if(snapShot.hasData){
           List moviesBuild = snapShot.data as List;
@@ -29,12 +40,12 @@ class ListViewWithHeading extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(left: 8, top: 20, bottom: 10),
                 child: Text(
-                  title,
+                  widget.title,
                   style: StyleForApp.headingBold,
                 ),
               ),
               Container(
-                height: height,
+                height: widget.height,
                 child: ListView.separated(
                     separatorBuilder: (context, index) {
                       return SizedBox(
@@ -192,7 +203,11 @@ class ListViewWithHeading extends StatelessWidget {
                         child: Image.network(
                             "https://image.tmdb.org/t/p/original/" +
                                 snapShot.data![index]["poster_path"],
-                            fit: BoxFit.cover),
+                            fit: BoxFit.cover,
+                            errorBuilder:(context, e,stackRace)=> Container() ,
+                            ),
+                            
+                            
                       ),
                     )),
               ),
