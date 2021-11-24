@@ -40,17 +40,17 @@ class _ComingSoonScreenState extends State<ComingSoonScreen> {
           child: NotificationListener<ScrollNotification>(
             onNotification: (n){
               if(scroll.position.userScrollDirection == ScrollDirection.forward || scroll.position.userScrollDirection == ScrollDirection.reverse ){
-                    if (n.metrics.pixels <= 100) {
+                   
                       // print(scroll.offset);
-                      notifier.value = 100 - n.metrics.pixels;
+                      notifier.value =  scroll.offset;
                       // print(notifier.value);
                       
                       return true;
-                    } else
-                      notifier.value = 0;
-                    return false;
+                   
+                    
                    }
-                   return false; },
+                   return true;
+                    },
            
             child: CustomScrollView(
               controller: scroll,
@@ -99,7 +99,7 @@ class _ComingSoonScreenState extends State<ComingSoonScreen> {
                 ...movies.map((e) => ValueListenableBuilder(
                   valueListenable: notifier,
                   builder: (context,value, child) {
-                    return ComingSoonTile(e);
+                    return ComingSoonTile(e, notifier.value,movies.indexOf(e));
                   }
                 )).toList(),
               ],

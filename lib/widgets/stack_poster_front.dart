@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:netflix_clone/screens/categories_screen.dart';
 
 import 'package:netflix_clone/style/style.dart';
 import 'package:netflix_clone/widgets/video_playing_Widget.dart';
@@ -143,17 +144,20 @@ class StackPoster extends StatelessWidget {
                             )
                           ],
                         ),
-                        Column(
-                          children: [
-                            Icon(
-                              Icons.info_rounded,
-                              color: Colors.white,
-                            ),
-                            Text(
-                              "info",
-                              style: StyleForApp.small,
-                            )
-                          ],
+                        GestureDetector(
+                          
+                          child: Column(
+                            children: [
+                              Icon(
+                                Icons.info_rounded,
+                                color: Colors.white,
+                              ),
+                              Text(
+                                "info",
+                                style: StyleForApp.small,
+                              )
+                            ],
+                          ),
                         ),
                       ],
                     ),

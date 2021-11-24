@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:netflix_clone/style/style.dart';
@@ -20,7 +22,10 @@ class _HomeScreenState extends State<HomeScreen> {
   double height = 100;
   final ValueNotifier<double> notifier = ValueNotifier(0);
   final ValueNotifier<double> notifierForBottom = ValueNotifier(0);
+  final ValueNotifier<double> notifierButton =ValueNotifier(0);
   Key homeKey = Key("0");
+  double buttonWidth= 50;
+ 
 
   @override
   void initState() {
@@ -29,9 +34,20 @@ class _HomeScreenState extends State<HomeScreen> {
     // scroll.addListener(_listner);
     notifier.value = 100;
     notifierForBottom.value = 0;
+    notifierButton.value=50;
   }
 
- 
+  
+
+  Widget one = Container();
+  bool expanded =false;
+
+ @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    scroll.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +55,9 @@ class _HomeScreenState extends State<HomeScreen> {
     return ValueListenableBuilder(
         valueListenable: notifierForBottom,
         builder: (context, value, child) {
+          
           return Scaffold(
+            
             appBar:  AppBarHomePage.AppBarForHome(notifierForBottom:notifierForBottom, width:width, titleOne: "TV Shows", titleTwo: "Movies",titleThree: "Categories" ,appBarKey:homeKey),
             extendBodyBehindAppBar: true,
             backgroundColor: Colors.transparent,
@@ -47,7 +65,24 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 NotificationListener<ScrollNotification>(
                   onNotification: (n) {
-                    if(scroll.position.userScrollDirection == ScrollDirection.forward || scroll.position.userScrollDirection == ScrollDirection.reverse ){
+                    if(scroll.position.userScrollDirection == ScrollDirection.forward ){
+                      
+                     
+                       notifierButton.value =170;
+                      
+                        
+                      
+                    if (n.metrics.pixels <= height) {
+                      notifier.value = 100 - n.metrics.pixels;
+                      notifierForBottom.value = n.metrics.pixels;
+                      return true;
+                    } else
+                      notifier.value = 0;
+                    return false;
+                   } else if(scroll.position.userScrollDirection == ScrollDirection.reverse ){
+                     
+                      notifierButton.value =50;
+                      
                     if (n.metrics.pixels <= height) {
                       notifier.value = 100 - n.metrics.pixels;
                       notifierForBottom.value = n.metrics.pixels;
@@ -58,6 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
                    }
                    return false; },
                   child: ListView(
+                    
                     controller: scroll,
                     padding: EdgeInsets.only(top: 0),
                     children: [
@@ -123,6 +159,41 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         );
                       }),
+                ),
+
+                Positioned(
+                  bottom: 20,
+                  right: 20,
+                  child: ValueListenableBuilder(
+                              valueListenable: notifierButton,
+                              builder: (context,value,child) {
+                  return AnimatedContainer(
+                    
+                    duration: Duration(microseconds: 600),
+                  onEnd: (){
+                     if(!expanded){
+                       print(expanded);
+                      one = Row(children: [Icon(Icons.shuffle,color: Colors.purple,),
+                          SizedBox(width: 10,),
+                          Text("Play Something",style: StyleForApp.headingBlack,)
+                          ],);
+                          expanded = true;
+                     }else {
+                       one = Container();
+                       expanded = false;
+                     }
+                  },
+                  padding: EdgeInsets.all(8),
+                          width: notifierButton.value,
+                          height: 50,
+                          child: notifierButton.value == 50 ? Icon(Icons.shuffle,color: Colors.purple): one,
+                          decoration: BoxDecoration(
+                            color: Colors.white.withOpacity(0.8),
+                            borderRadius: BorderRadius.circular(20)
+                          ),
+                  );
+                              }
+                            ),
                 ),
               ],
             ),

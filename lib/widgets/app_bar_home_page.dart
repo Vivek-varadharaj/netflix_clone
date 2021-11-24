@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:netflix_clone/screens/categories_screen.dart';
 import 'package:netflix_clone/screens/movies_screen.dart';
 import 'package:netflix_clone/screens/tv_shows_screen.dart';
 import 'package:netflix_clone/style/style.dart';
@@ -13,6 +14,7 @@ class AppBarHomePage {
     
   
       return AppBar(
+        toolbarOpacity: 0,
               elevation: 0,
               backgroundColor: notifierForBottom.value<60? Colors.black.withOpacity(notifierForBottom.value/100): Colors.black.withOpacity(0.6),
               bottom: PreferredSize(
@@ -53,6 +55,11 @@ class AppBarHomePage {
                           ),
                         ),
                         GestureDetector(
+                          onTap: (){
+                            Navigator.of(context).push(PageRouteBuilder(
+                              opaque: false,
+                              pageBuilder: (context,_,__)=>CategoryScreen()) );
+                          },
                           child: titleThree != null ? IntrinsicWidth(
                             child: Row(
                               children: [
